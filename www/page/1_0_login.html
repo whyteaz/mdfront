@@ -1,0 +1,55 @@
+<ons-page modifier="full_bg">
+</br>
+
+<div style="text-align:center">
+    <img src="img/logo-small.jpg" style="height:200px;" alt=""/>
+</div>
+    
+<div class="login-form">
+        <div class="input-cont">    
+        <ons-icon class="login-icon" icon="fa-user"></ons-icon><input type="email" class="loginbar text-input--underbar" placeholder="Email" value="">
+        </div>
+        <div class="input-cont">    
+        <ons-icon class="login-icon" icon="fa-lock"></ons-icon><input type="password" class="text-input--underbar" placeholder="Password" value="">
+        </div>
+        <br> 
+        <ons-button modifier="large" class="login-button button--outline" ng-click="app.ngLogin()">Log In</ons-button>
+        <br>
+        <ons-button modifier="quiet" class="forgot-password" ng-click="app.ngPush('page/1_1_forgot.html')">Forgot password?</ons-button>
+      </div>
+</br>
+<div style="text-align:center;color:white"><div class="midline"></div><span class="suspend">Or Sign in with</span><div class="midline"></div></div>
+</br>
+<div class="fab-item-cont">
+    <div class="fab-item">
+        <ons-fab class="fabber">
+  <ons-icon  class="fabber-trans1" 
+    icon="fa-facebook">
+  </ons-icon>
+</ons-fab>
+    </div>
+    <div class="fab-item">
+         <ons-fab  class="fabber">
+  <ons-icon class="fabber-trans2" icon="fa-twitter">
+  </ons-icon>
+</ons-fab>
+    </div>
+    
+    <div class="fab-item">        
+     <ons-fab  class="fabber">
+  <ons-icon  class="fabber-trans3" 
+    icon="fa-google">
+  </ons-icon>
+</ons-fab>
+    </div>    
+    </div>
+    </br>
+    </br>
+    </br>
+    </br>
+    <div class="login-form">
+        <ons-button modifier="quiet" class="car-button button--outline" ng-click="app.ngPush('page/1_2_register.html')">Register Now</ons-button>
+      </div>
+
+      
+    </ons-page>

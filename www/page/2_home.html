@@ -1,0 +1,350 @@
+<!--
+//Index
+//1SR - Search Results
+//1CR - Carousel 1 - Feed
+//2CR - Carousel 2 - Shops
+//3CR - Carousel 3 - In Store
+//4CR - Carousel 4 - Favourites
+-->
+
+
+
+<ons-page modifier="full_bg">
+
+<!--Search bar-->
+<ons-toolbar fixed-style>
+       <!-- <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>-->
+        <div class="center" style="color:white;text-align: center;margin-left:7%;margin-right:-6%">
+                      <form id="form">
+                     <input id="search-cont" type="search" class="search-input home-search" style="margin: 8px auto 5px auto;" placeholder="Coffee? Laksa?">
+                        </form>
+        </div>
+
+
+<!--
+//Toggle Menu Button
+//Refer to index.html for menu items
+//Refer to index.html for events
+-->
+
+    <div class="right">
+          <ons-toolbar-button class="home-menu-but" ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+          <ons-toolbar-button class="home-back-but" onclick="backfn()">
+            <ons-icon icon="ion-arrow-left-c"></ons-icon>
+          </ons-toolbar-button>
+        </div> 
+</ons-toolbar>
+
+
+<!--
+//Index
+//1SR - Search Results
+-->
+
+<!---DRAGGER START-->
+
+    <div id="menu-wrapper">
+                <div class="dragdealer" id="content-scroller">
+                    <div id="menu-window" class="red-bar handle">
+                    
+                 <div id="store-img-scroll" style="background-image:url({{fil_img}});"> 
+                 <img id="malldash-bg" src="img/shopping.jpg" alt="" />
+                 </div>
+                    
+                        <div id="real-menu">
+                            <div id="bevel"></div>
+                            <div id="current-mall" style="margin-left:20px;margin-top:7px;font-weight:bold"><span ng-click="app.ngMall(1)">{{fil_mall}}</span></div> 
+                        <div id="bevel2">
+                        <ons-list>
+                            <ons-list-item>
+                                {{fil_desc}}        
+                            </ons-list-item>
+                        </ons-list>
+                        
+                            
+                        </div>
+                        </div>            
+                    </div>
+            </div>
+        </div>
+
+<!---DRAGGER END--->
+
+        <div id="result-box" class="home-pages">
+
+            <ons-list>
+         
+                  <ons-list-item modifier="chevron" class="list-item-container" tappable onclick="backfn()">
+                  <ons-row>
+                    <ons-col width="95px">
+                      <img src="img/food1.png" class="thumbnail">
+                    </ons-col>
+                    <ons-col>
+                      <div class="name">
+                        Dragon-i Chinese Restaurant
+                      </div>
+                      <div class="location">
+                        <i class="fa fa-map-marker"></i> Kuala Lumpur
+                      </div>
+                      <div class="post-desc">
+                        <i class="fa fa-star gold"></i><i class="fa fa-star gold"></i><i class="fa fa-star gold"></i><i class="fa fa-star gold"></i>
+                      </div>
+
+                    </ons-col>
+                    <ons-col width="40px"></ons-col>
+                  </ons-row>
+                </ons-list-item>
+              </ons-list>
+  
+        </div>
+
+<!--
+//Sliding menu below the search bar
+//
+-->
+
+
+<div class="tilemenu">
+    <ons-button class="tile-but tile0 active-tile" ng-click="app.changecar(0)">
+          <ons-icon class="tile-but-icon" icon="ion-flame"></ons-icon>
+    </ons-button>
+    <ons-button class="tile-but tile1" ng-click="app.changecar(1)">
+          <ons-icon class="tile-but-icon" icon="fa-map-marker"></ons-icon>
+    </ons-button>
+    <ons-button class="tile-but tile2" ng-click="app.changecar(2)">
+          <ons-icon class="tile-but-icon" icon="fa-shopping-bag"></ons-icon>
+    </ons-button>
+    <ons-button class="tile-but tile3" ng-click="app.changecar(3)">
+          <ons-icon class="tile-but-icon" icon="fa-credit-card"></ons-icon>
+    </ons-button>
+
+</div>
+
+<!--<div class="filterpane" >
+    <div style="margin:15px"><ons-icon icon="fa-filter" style="color:gray;"></ons-icon>&nbsp<span>{{fil_mall}}</span><ons-icon onclick="$('.filterpane').hide()" icon="fa-times" style="color:red;float:right;"></ons-icon></div>
+   
+</div>-->
+
+<ons-fab id="fab3" ng-click="app.ngMall(2)">
+    <ons-icon
+    icon="fa-exchange">
+    </ons-icon>
+</ons-fab>
+
+
+
+<!--Start carousel-->
+<ons-carousel id="carousel" swipeable overscrollable auto-scroll style="height:70%;width:100%;" var="carousel" ons-postchange="app.ngChangetile('swipe')">
+
+<!--
+//1CR - Carousel 1 - Feed
+-->
+
+
+<ons-carousel-item class="caritem"  id="caritem1" style="overflow-y:auto;" lock-on-drag>
+ 
+         <ons-list id="reward-list">
+     <ons-list-item tappable class="list-item-container promolist" ng-repeat="(key,i) in promo_arr" ng-click="app.getPromoInfo(key)">
+          <ons-row id="{{key}}">
+            <ons-col width="95px">
+              <img src="{{i.logo}}" class="thumbnail"></img>
+            </ons-col>
+            <ons-col>
+              <div class="name">
+                {{i.name}}
+              </div>
+              <div class="location">
+                <i class="fa fa-map-marker"></i> {{i.city}}
+              </div>
+              <div class="desc">
+                {{i.desc}}
+              </div>
+            </ons-col>
+            <ons-col width="40px"></ons-col>
+          </ons-row>
+        </ons-list-item>
+         
+      </ons-list>
+        
+ <!--
+ <ons-list id="post_list">
+ 
+   
+    <ons-list-item class="post">
+        <div class="poster">
+            <table>
+                <tr>
+            		<td class="poster_pic_cont"><img class="poster_pic" src="img/user2.png" alt=""/></td>
+                    <td class="poster_name_cont"><span class="poster_name">Sunway Pyramid</span></br><ons-icon class="post-icon" icon="fa-clock-o"></ons-icon><span class="post_time">12 mins ago</span></td>
+            	</tr>
+            </table>        
+        </div>
+        <img class="post_cont_img" src="img/content2.jpg" alt=""/>
+        <div class="post_desc">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...<a href="#" style="text-decoration:none;color:rgba(0,0,0,0.5)" class="showmore" onclick="$('.post123hide,.showless,.showmore').toggle()">Show More</a>
+        </div>
+        <div class="post_desc post123hide" style="display:none;">
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum<a href="#" style="text-decoration:none;color:rgba(0,0,0,0.5);display:none;" class="showless" onclick="$('.post123hide,.showless,.showmore').toggle()"> Show Less</a>
+        </div>
+        <div class="post_actions">
+            <ons-button class="post_act_but"><ons-icon class="post_act" icon="fa-star-o"></ons-icon></ons-button>
+            <ons-button class="post_act_but"><ons-icon class="post_act" icon="fa-comment-o"></ons-icon></ons-button>
+            <ons-button class="post_act_but"><ons-icon class="post_act" icon="fa-paper-plane-o"></ons-icon></ons-button>
+        </div>
+    
+    </ons-list-item>
+    <ons-list-item class="post" lock-on-drag>
+  
+        <div class="poster">
+            <table style="margin:0px;">
+                <tr>
+                	<td class="poster_pic_cont"><img class="poster_pic" src="img/user1.png" alt="" /></td>
+                    <td class="poster_name_cont"><span class="poster_name">Tropicana City Mall</span></br><ons-icon class="post-icon" icon="fa-clock-o"></ons-icon><span class="post_time">12 mins ago</span></td>
+            	</tr>
+            </table>        
+        </div>
+        <img class="post_cont_img" src="img/feed1.png" alt="" />
+        <div class="post_desc">
+            Borders book clearance  at GF Main Atrium A, Tropicana City Mall, Petaling Jaya, Selangor 
+            </br>Up to 70% Off! 
+</div>
+        <div class="post_actions">
+            <ons-button class="post_act_but"><ons-icon class="post_act" icon="fa-star-o"></ons-icon></ons-button>
+            <ons-button class="post_act_but"><ons-icon class="post_act" icon="fa-comment-o"></ons-icon></ons-button>
+            <ons-button class="post_act_but"><ons-icon class="post_act" icon="fa-paper-plane-o"></ons-icon></ons-button>
+        </div>
+
+             
+  
+        </ons-list-item>
+        <ons-list>-->
+    </ons-carousel-item>
+    
+
+    
+<!--
+//2CR - Carousel 2 - Shops
+-->
+   
+  
+ <ons-carousel-item class="caritem"  id="caritem2" style="overflow-y:auto;">
+ 
+ 
+         <ons-list id="reward-list">
+        <ons-list-item modifier="chevron" class="list-item-container" tappable ng-click="app.ngShop($index)" ng-repeat="i in store_list">
+          <ons-row>
+            <ons-col width="95px">
+              <img src="{{i.img}}" class="thumbnail">
+            </ons-col>
+            <ons-col>
+              <div class="name">
+                {{i.store}}
+              </div>
+              <div class="location">
+                <i class="fa fa-map-marker"></i>&nbsp{{i.loc}}
+              </div>
+                      <div class="post-desc">
+                        <i class="fa fa-star gold"></i><i class="fa fa-star gold"></i><i class="fa fa-star gold"></i><i class="fa fa-star gold"></i>
+                      </div>
+              
+            </ons-col>
+            <ons-col width="40px"></ons-col>
+          </ons-row>
+        </ons-list-item>
+        
+      </ons-list>
+ 
+  
+    </ons-carousel-item>  
+
+<!--
+//3CR - Carousel 3 - Directory
+-->
+    <ons-carousel-item class="caritem" id="caritem4" style="overflow-y:auto;">
+                
+            <ons-list>
+            
+                <ons-list-item modifier="chevron" class="list-item-container" tappable ng-repeat="i in malls">
+                  <ons-row>
+                    <ons-col width="95px">
+                      <img src="img/{{i.img}}" class="thumbnail">
+                    </ons-col>
+                    <ons-col>
+                      <div class="name">
+                        {{i.mall}}
+                      </div>
+                      <div class="location">
+                        <i class="fa fa-map-marker"></i>&nbsp{{i.loc}}
+                      </div>  
+
+                    </ons-col>
+                    <ons-col width="40px"></ons-col>
+                  </ons-row>
+                </ons-list-item>
+              </ons-list>
+              
+    </ons-carousel-item>
+    
+    
+<!--
+//4CR - Carousel 4 - Favourites
+-->
+    <ons-carousel-item class="caritem" id="caritem3" style="overflow-y:auto;">
+   
+      <div class="find-reward">
+        <ons-button modifier="quiet" class="car-button button--outline" ng-click="app.ngPushRew();">Find Mall and Card Rewards</ons-button>
+      </div>
+      
+   <ons-list>
+
+                        <ons-list-item modifier="chevron" class="list-item-container" tappable ng-click="app.ngShop()">
+                  <ons-row>
+                    <ons-col width="95px">
+                      <img src="img/food1.png" class="thumbnail">
+                    </ons-col>
+                    <ons-col>
+                      <div class="name">
+                        Dragon-i Chinese Restaurant
+                      </div>
+                      <div class="location">
+                        <i class="fa fa-map-marker"></i> Kuala Lumpur
+                      </div>
+                      <div class="post-desc">
+                        <i class="fa fa-star gold"></i><i class="fa fa-star gold"></i><i class="fa fa-star gold"></i><i class="fa fa-star gold"></i>
+                      </div>
+
+                    </ons-col>
+                    <ons-col width="40px"></ons-col>
+                  </ons-row>
+                </ons-list-item>
+                
+                     <ons-list-item modifier="chevron" class="list-item-container" tappable ng-click="app.ngOffer()">
+          <ons-row>
+            <ons-col width="95px">
+              <img src="img/promo1.png" class="thumbnail">
+            </ons-col>
+            <ons-col>
+              <div class="name">
+                Tealive Aisa offer Buy 1 FREE 1 promo
+              </div>
+              <div class="location">
+                <i class="fa fa-map-marker"></i> TeaLive MyTown, Cheras
+              </div>
+             <!-- <div class="desc">
+             Hello Tealive drinkers in Cheras! There is a new outlet in town, and the best way to enjoy is with them Buy 1 free 1 promo in Tealive MyTown from 20 March – 22 March 2017. Terms & Conditions apply!
+              </div>-->
+            </ons-col>
+            <ons-col width="40px"></ons-col>
+          </ons-row>
+        </ons-list-item>
+      </ons-list>
+    </ons-carousel-item>
+  </ons-carousel>
+
+</ons-page>

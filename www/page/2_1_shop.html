@@ -1,0 +1,54 @@
+<ons-page modifier="shop-details">
+    
+            <ons-toolbar modifier="transparent" >
+
+
+        <div class="center" style="color:white;text-align: center;margin-left:7%;margin-right:-6%">
+                {{store_detail.store}}
+        </div>
+        <div class="right">
+        <ons-toolbar-button class="home-menu-but" ng-click="app.ngPop()">
+            <ons-icon icon="ion-arrow-left-c" class="shadow"></ons-icon>
+        </ons-toolbar-button>
+        </div> 
+    </ons-toolbar>
+    
+      <div class="card" style="background-image: url();">
+
+        </div>
+
+<div class="itemmenu">
+    <ons-button class="tile-but" onclick="$('.toggle-fav').addClass('gold');">
+          <ons-icon class="tile-but-icon toggle-fav" icon="fa-star">
+    </ons-button>
+        <ons-button class="tile-but">
+          <ons-icon class="tile-but-icon" icon="fa-phone">
+    </ons-button>
+        <ons-button class="tile-but">
+          <ons-icon class="tile-but-icon" icon="fa-comment">
+    </ons-button>
+        <ons-button class="tile-but">
+          <ons-icon class="tile-but-icon" icon="fa-book">
+    </ons-button>
+</div>
+
+
+        <ons-list style="border-top: 0;">
+                <ons-list-item class="list-item-container prop-desc" tappable>
+                 <ons-icon icon="fa-home" ></ons-icon>
+              <span class="detail-desc"> {{store_detail.store}}</span>
+            </ons-list-item>
+          <ons-list-item class="list-item-container prop-desc" tappable ng-click="app.ngMap()"> 
+              <ons-icon icon="fa-map-marker" ></ons-icon>
+              <span class="detail-desc"> {{store_detail.loc}}</span><ons-icon icon="fa-chevron-right" class="store-chev"></ons-icon>
+              
+          </ons-list-item>
+
+          <ons-list-item class="list-item-container prop-desc" tappable>
+              <ons-icon icon="fa-phone" ></ons-icon>
+              <span class="detail-desc">+603 7806 3188</span><ons-icon icon="fa-chevron-right" class="store-chev">
+          </ons-list-item>
+              
+        </ons-list>
+    
+</ons-page>

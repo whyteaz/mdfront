@@ -1,0 +1,38 @@
+<ons-page modifier="full_bg">
+
+<ons-modal var="modal">
+  Yay! Please check your email</br> to reset your password!
+  </br>
+  </br>
+  </br>
+  </br>
+  <div class="login-form">
+   <ons-button modifier="large" class="login-button button--outline" onclick="modal.hide()">Got It!</ons-button>
+     </div>
+     
+</ons-modal>
+
+      <ons-toolbar>
+             <div class="left">
+          <ons-toolbar-button ng-click="app.ngPop()">
+            <ons-icon icon="fa-arrow-left"></ons-icon>
+          </ons-toolbar-button>
+        </div> 
+        <div class="center">
+          Forgot Password 
+        </div>
+      </ons-toolbar>
+
+
+<div class="login-form">
+        <br> <br>       
+        Enter your email below and hit reset    
+                <br> <br>       
+        <div class="input-cont">    
+        <ons-icon class="login-icon" icon="fa-user"></ons-icon><input type="email" class="loginbar text-input--underbar" placeholder="Email" value="">
+        </div>
+        <br> <br>       
+        <ons-button modifier="large" class="login-button button--outline" onclick="modal.show()">Reset Password</ons-button>
+          </div>
+
+    </ons-page>

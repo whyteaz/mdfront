@@ -1,0 +1,280 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <script src="components/loader.js"></script>
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/onsenui/js/onsenui.min.js"></script>
+  <script src="lib/onsenui/js/angular-onsenui.min.js"></script>
+  <script src="js/control.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.7.8/firebase.js"></script>
+  <script src="lib/drag.js"></script>
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAyLwM5pc58_XvnSyfCg_vNdN4iz7OV3wA",
+    authDomain: "malldash-d717c.firebaseapp.com",
+    databaseURL: "https://malldash-d717c.firebaseio.com",
+    projectId: "malldash-d717c",
+    storageBucket: "malldash-d717c.appspot.com",
+    messagingSenderId: "1094013621248"
+  };
+  firebase.initializeApp(config);
+  //Firebase Variables
+  var fireb_country;
+ var fireb_promo;
+  
+  //Home page
+  var home='page/2_home.html';
+  var tut='page/2_0_tut.html';
+  var shop='page/2_1_shop.html';
+  var offer='page/2_2_offer.html';
+  var rewards='page/2_3_rewards.html';
+  var map='page/2_4_map.html';
+  var mall='page/2_5_mall.html';
+  var mall_arr;
+  var tutvar=0;
+  
+    ons.platform.select('android')
+    ons.bootstrap()
+      .controller('AppController', function($scope) {
+        $scope.fil_mall="Start my MallDash!";
+        
+        this.toggle = function() {
+          $scope.splitter.left.toggle();
+        };
+        
+        this.changecar = function (input){
+          $scope.carousel.setActiveIndex(input)
+          changetile(input)
+          menu_promise=input
+        }
+        
+        this.ngLogin = function (){
+                nav.pushPage(home).then(
+                setTimeout(function(){
+                    initCarousel();
+                    drag()
+                    $scope.apply;
+                if(tutvar==0){
+                    //modal.show(); //Tutorial
+                }
+                tutvar=1;
+                },500))
+                
+            fireb_country=firebase.database().ref('mall/');
+            fireb_country.orderByChild("country").on('value', function(data) {
+            mall_arr=JSON.parse(JSON.stringify(data));
+            $scope.mall_arr=mall_arr;
+
+
+            fireb_promo=firebase.database().ref('pro_m/');
+            fireb_promo.orderByChild("country").on('value', function(data) {
+            $scope.promo_arr=JSON.parse(JSON.stringify(data));
+            $scope.$apply();   
+            })    
+
+
+            })
+        }
+        
+        this.ngTut = function(){
+                nav.pushPage(tut)
+                modal.hide()
+        }
+  
+        this.ngPushRew = function() {
+          nav.pushPage(rewards).then(setTimeout(function(){loadrewfn()},500))
+        };
+        
+        this.ngPush = function(page,callback) {
+          nav.pushPage(page).then(setTimeout(function(){callback},1000))
+          $scope.splitter.left.close();
+        };
+        
+        this.ngPop = function() {
+          nav.popPage();
+          $scope.splitter.left.close(); 
+        };
+        this.ngChangetile = function(){
+          changetile('swipe')
+        }
+        this.ngShop = function(index){
+          $scope.store_detail=mystorelist[index]
+          nav.pushPage(shop).then(
+              setTimeout(function(){$(".card").css("background-image","url("+mystorelist[index].imgb+")")},200)
+              )
+      
+        }
+        this.ngMall = function(input){
+          if(input==1&&stow==1||input==2||input==1&&startdash==0){
+          
+          nav.pushPage(mall).then(setTimeout(function(){filterMall()},1000))  
+          }         
+            //$scope.curr_country=name;
+            //curr_country=input;
+            //curr_country_name=name;
+
+            //console.log(JSON.stringify(data))
+            //$scope.mall_total=data.numChildren();
+            $("#search-mall").on('keyup',function(){filter()})
+            //$scope.$apply();          
+        }
+        this.ngOffer=function(){
+          nav.pushPage(offer).then(setTimeout(function(){},1000)) 
+        }
+        this.ngFilter=function(index){   
+          $scope.fil_mall=mall_arr[Object.keys(mall_arr)[index]].name
+          $scope.fil_img=mall_arr[Object.keys(mall_arr)[index]].img
+          $scope.fil_desc=mall_arr[Object.keys(mall_arr)[index]].desc
+          $("#malldash-bg").hide()
+          nav.popPage() 
+          startdash=1
+          setTimeout(function(){$('.filterpane').show()},300)
+        }
+
+        
+        
+        
+        
+        this.ngMap=function(){
+          nav.pushPage(map).then(setTimeout(function(){initMap()},500)) 
+        }
+        
+
+        $scope.store_list=mystorelist;
+
+
+      });
+    
+    var mystorelist=[
+            {"store":"A Pea in a Pod","loc":"Gardens Mall","img":"img/s1.png","imgb":"img/s1b.jpg"},
+            {"store":"Atheleta","loc":"Gardens Mall","img":"img/s2.png","imgb":"img/s2b.jpg"},
+            {"store":"Apple","loc":"Gardens Mall","img":"img/s3.png","imgb":"img/s3b.jpg"},
+            {"store":"Aldo Shoes","loc":"Gardens Mall","img":"img/s4.png","imgb":"img/s4b.jpg"}
+            ]
+    var phone;
+    var ios=0;
+    var startdash=0;
+    ons.ready(function() {
+        console.log("Initializing listeners");         
+        //Set a delay for initiation
+        setTimeout(function(){
+        phone = device.platform;
+        if(phone=="iOS"){ios=19;}
+        console.log("App is ready on "+phone);         
+         },500) 
+
+    });
+  </script>
+</head>
+<body>
+
+  <ons-splitter ng-controller="AppController as app" var="splitter">
+    <ons-splitter-side side="left" width="220px" collapse><!--swipeEnabled-->
+      <ons-page>
+        <ons-list>
+          <ons-list-item ng-click="app.load('page/2_home.html')" tappable>
+            Home
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('settings.html')" tappable>
+            Settings
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('about.html')" tappable>
+            About
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('page/2_3_rewards.html')" tappable>
+            Rewards
+          </ons-list-item>
+          <ons-list-item ng-click="app.ngPop()" tappable>
+            Logout
+          </ons-list-item>
+        </ons-list>
+      </ons-page>
+    </ons-splitter-side>
+    <ons-splitter-content page="navigator.html"></ons-splitter-content>
+  </ons-splitter>
+
+
+<ons-template id="navigator.html">
+<!--Tutorial-->
+<ons-modal var="modal" style="padding:10%" onclick="modal.hide()" animation="fade">
+  <br>Welcome To MallDash
+  <br>
+  <br>
+  <br>
+  <ons-button modifier="large"ng-click="app.ngTut()">Start Tutorial</ons-button>
+  <br>
+  <br>
+  <ons-button modifier="large" onclick="modal.hide()">Skip Tutorial</ons-button>
+
+</ons-modal>
+
+
+  <ons-page>   
+  <ons-navigator id="nav" var="nav" page="page/1_0_login.html">
+  </ons-navigator>
+    </ons-page>
+</ons-template>
+
+
+  <ons-template id="home.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          Main
+        </div>
+      </ons-toolbar>
+      <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+        Swipe right to open the menu!
+      </p>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="settings.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          Settings
+        </div>
+      </ons-toolbar>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="about.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          About
+        </div>
+      </ons-toolbar>
+    </ons-page>
+  </ons-template>
+  
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=">
+    </script>
+</body>
+</html>

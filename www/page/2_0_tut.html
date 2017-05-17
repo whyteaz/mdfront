@@ -1,0 +1,93 @@
+<ons-page modifier="full_bg">
+
+<ons-toolbar fixed-style>
+        <div class="center" style="color:white;text-align: center;margin-left:7%;margin-right:-6%">
+                      <form id="form">
+                     <input id="search-cont" type="search" class="search-input home-search" style="margin: 8px auto 5px auto;" placeholder="Search">
+                        </form>
+        </div>
+
+    <div class="right">
+          <ons-toolbar-button class="home-menu-but">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div> 
+
+</ons-toolbar>
+
+
+<div class="login-form tut1">
+<br>
+<div style="width:50%;float:right;height:50%;text-align:right;">
+    <img src="img/arrowrg.png" style="height:50%;width:50%;" alt="" /><br>
+    Other Settings
+</div>
+<div style="width:50%;float:left;">
+    <img src="img/arrowlt.png" style="height:50%;width:50%;" alt="" /><br>
+    Search Bar
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+        <ons-button modifier="large" class="login-button button--outline" onclick="$('.tut1').hide();$('.tuttile').show();$('.fabflex').css('display','flex')">Got It</ons-button>
+     </div>
+
+<div class=" tuttile tilemenu" style="display:none;">
+    <ons-button class="tile-but active-tile">
+          <ons-icon class="tile-but-icon" icon="ion-flame">
+    </ons-button>
+    <ons-button class="tile-but active-tile">
+          <ons-icon class="tile-but-icon" icon="fa-map-marker">
+    </ons-button>
+    <ons-button class="tile-but active-tile">
+          <ons-icon class="tile-but-icon" icon="fa-shopping-bag">
+    </ons-button>
+    <ons-button class="tile-but active-tile">
+          <ons-icon class="tile-but-icon" icon="fa-star">
+    </ons-button>
+
+</div>
+
+<div class="tuttile">
+    <table height="110px" width="96%" style="margin:0px 2%;">
+        <tr>
+        	<td class="tuttab"><img class="arrup" src="img/arrowup.png" alt="" /></td>
+            <td class="tuttab"><img class="arrup" src="img/arrowup.png" alt="" /></td>
+            <td class="tuttab"><img class="arrup" src="img/arrowup.png" alt="" /></td>
+            <td class="tuttab"><img class="arrup" src="img/arrowup.png" alt="" /></td>
+    	</tr>
+        <tr><td></td></tr>
+        <tr><td></td></tr>
+        <tr><td></td></tr>
+        <tr>
+    		<td class="tuttab"><div class="tutrotate">Search Hot Promos</div></td>
+            <td class="tuttab"><div class="tutrotate">Search Store/Map</div></td>
+            <td class="tuttab"><div class="tutrotate">Search In Store</div></td>
+            <td class="tuttab"><div class="tutrotate">Search By Cards</div></td>
+    	</tr>
+    </table>
+</div>
+
+<div class="login-form tuttile" style="bottom:5%;position:absolute;margin-left:10%;">
+        <ons-button modifier="large" class="login-button button--outline" ng-click="app.ngPop()">Got It</ons-button>
+</div>
+
+<ons-fab id="fabtut" class="tuttile">
+    <ons-icon
+    icon="fa-exchange">
+    </ons-icon>
+</ons-fab>
+
+<div class="tuttile fabflex" style="bottom:17%;position:absolute;right:28%;align-items:center;"> 
+    <div style="display:inline;">Filter malls</div> <img style="width:75px;" src="img/arrowsrt.png"/>
+</div>
+
+</ons-page>
+  
+ 

@@ -1,0 +1,23 @@
+{
+    "plugins": [
+        "mobi.monaca.plugins.Monaca"
+    ],
+    "framework_version": "3.5",
+    "xcode_version": "7",
+    "cordova_version": "6.2",
+    "plugin_settings": [],
+    "external_plugins": [
+        "cordova-plugin-whitelist@1.2.2",
+        "cordova-plugin-splashscreen@3.2.2",
+        "cordova-custom-config@2.0.3",
+        "cordova-plugin-device@1.1.2",
+        "cordova-plugin-inappbrowser@1.5.0"
+    ],
+    "title-ja": "",
+    "title-en": "Mall Dash",
+    "description-ja": "",
+    "description-en": "",
+    "category": "User Template",
+    "platform": [],
+    "name": "generated-1494055276-58f58ceaff2af2946ee6e04a"
+}

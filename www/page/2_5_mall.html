@@ -1,0 +1,43 @@
+
+<ons-page>
+    
+<ons-toolbar fixed-style>
+        <div class="center" style="color:white;text-align: center;margin-left:7%;margin-right:-6%">
+            <form id="form">
+            <input id="search-mall" type="search" class="search-input home-search" style="margin: 8px auto 5px auto;" placeholder="Change Mall">
+            </form>
+        </div>
+
+    <div class="right">
+          <ons-toolbar-button class="home-menu-but" ng-click="app.ngPop()">
+            <ons-icon icon="fa-close"></ons-icon>
+          </ons-toolbar-button>
+        </div> 
+
+</ons-toolbar>
+
+<div id="result-mall" style="height:100%;overflow-y:scroll">
+
+<ons-list >
+    
+       <ons-list-item modifier="chevron" class="list-item-container" ng-click="app.ngFilter($index)" tappable ng-repeat="i in mall_arr">
+      <ons-row>
+        <ons-col width="95px">
+          <img src="{{i.logo}}" class="thumbnail">
+        </ons-col>
+        <ons-col>
+          <div class="name">
+            {{i.name}}
+          </div>
+          <div class="location">
+            <i class="fa fa-map-marker"></i>&nbsp{{i.city}}
+          </div>
+        </ons-col>
+        <ons-col width="40px"></ons-col>
+      </ons-row>
+    </ons-list-item>
+    
+</ons-list>
+</div>
+
+</ons-page>
